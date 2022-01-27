@@ -44,6 +44,7 @@ namespace SignalRClient
         public static HttpTransportType TransportType { get; set; }
         public static TimeSpan SendDelay { get; set; }
 
+        // usage: SignalRClient.exe -t WebSockets -p json -s echo -d 10 -c 500 -u http://localhost:5000/echo
         static async Task Main(string[] args)
         {
             var app = new CommandLineApplication();
