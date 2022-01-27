@@ -1,0 +1,21 @@
+﻿jobs:
+  signalrClient:
+    source:
+      repository: https://github.com/aspnet/benchmarks.git
+      branchOrCommit: main
+      project: src/SignalRClient/SignalRClient.csproj
+    readyStateText: SignalR Client
+    waitForExit: true
+    variables:
+      connections: 100
+      duration: 15
+      transport: websockets
+      scenario: broadcast
+      path: /echo
+      logLevel: none
+      protocol: json
+      sendDelay: 0
+      serverScheme: http
+      serverAddress: localhost
+      serverPort: 5000
+    arguments: "-c {{connections}} -d {{duration}} -t {{transport}} -s {{scenario}} -u {% if serverUri == blank or serverUri == empty %} {{serverScheme}}://{{serverAddress}}:{{serverPort}}{{path}} {% else %} {{serverUri}}:{{serverPort}}{{path}} {% endif %} -p {{ protocol }} {% if sendDelay != 0 %} --sendDelay {{ sendDelay }} {% endif %} {% if logLevel != 'none' %} --loglevel {{ logLevel }} {% endif %}"
